@@ -1,0 +1,101 @@
+
+type Query {
+    ticketList : [Ticket]
+    ticketById(id : Float) : Ticket
+    matchs:[Match]
+    matchById(id : Float): Match
+}
+
+
+
+type Mutation {
+    saveMatch(matchRequest:MatchRequest):Match
+    saveTicket(ticketRequest:TicketRequest):Ticket
+    updateTicket(id:Float,ticketRequest:TicketRequest):Ticket
+    deleteTicket(id:Float):String
+}
+
+type Ticket{
+    id: Float,
+    reference:String,
+    prix:Float,
+    statut:Boolean,
+    achete:Boolean,
+    match:Match
+}
+type Match{
+    id: Float,
+    reference:String,
+    matchDate:String,
+    lieu:String,
+    equipe1:String,
+    equipe2:String,
+    tickets:[Ticket]
+}
+input MatchRequest{
+    reference:String,
+    matchDate:String,
+    lieu:String,
+    equipe1:String,
+    equipe2:String,
+}
+input TicketRequest{
+    prix:Float,
+    matchId:Float,
+    achete:Boolean,
+    statut:Boolean
+}
+
+/*
+query{
+  ticketList {
+    id,reference,prix,statut,achete,match{
+      id,lieu
+    }
+  }
+}
+
+query{
+  matchs {
+    id,reference,matchDate,lieu,tickets{
+      id,reference,prix
+    }
+  }
+}
+
+query{
+  ticketById(id : 10){
+    id,reference,prix
+  }
+}
+
+
+mutation{
+  saveMatch(matchRequest : {
+    reference:"ref04",matchDate: "12/12/2012",lieu:"Casablanca",equipe1:"RAJA",equipe2:"Wydad"
+  }) {
+    id,reference,matchDate,equipe1,equipe2
+  }
+}
+
+mutation{
+  updateTicket(
+    id : 1,
+    ticketRequest : {
+      prix: 1000,matchId :1,achete:true,statut:true
+    }
+  ){
+    prix,achete,statut,match{id}
+  }
+}
+
+
+mutation{
+  saveTicket(ticketRequest : {
+   prix:123.75 , matchId : 2, achete : true,statut: true
+  }){
+    id,reference,achete,statut,match{id}
+  }
+}
+
+*/
